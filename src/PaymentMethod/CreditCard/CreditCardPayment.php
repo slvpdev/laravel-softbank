@@ -17,12 +17,20 @@ class CreditCardPayment extends CreditCard
     protected $continuePaymentRequestId = '';
     protected $continueCancelRequestId  = '';
     protected $continueCancelNoticeId   = '';
-    
+
+    // Docomo
+    protected $recurringBilling         = 'ST01-00104-401';
+
     protected $saveCardInfoRequestId    = 'MG02-00101-101';
     protected $updateCardInfoRequestId  = 'MG02-00132-101';
     protected $deleteCardInfoRequestId  = 'MG02-00103-101"';
     protected $getCardInfoRequestId     = 'MG02-00104-101';
 
+
+    public function createDocomoTransaction(Payload $payload): Response
+    {
+        return $this->createRequest($payload, $this->recurringBilling);
+    }
 
     public function createTransaction(Payload $payload): Response
     {
